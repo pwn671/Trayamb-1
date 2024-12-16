@@ -5,6 +5,12 @@ import { FaFacebookF } from "react-icons/fa";
 import { FaGoogle } from "react-icons/fa";
 
 function Login() {
+    const [EnteryourEmailid,setEnteryourEmailid] = useState("");
+    const [EnterPassword,setEnterPassword] = useState("");
+
+    const handlesubmit=()=>{
+      console.log(EnteryourEmailid,EnterPassword)
+    }
   return (
 
     <div className="backgroundcss">
@@ -12,10 +18,10 @@ function Login() {
         <div className="heading">
           <h3>Create Your Account</h3>
           <p>Please enter your login credentials to access your account.</p>
-          <input type="text" placeholder="Enter your Email id" />
-          <input type="text" placeholder="Enter Password" />
+          <input type="text" value={EnteryourEmailid} onChange={()=>setEnteryourEmailid(event.target.value)}  placeholder="Enter your Email id" />
+          <input type="text" value={EnterPassword}onChange={()=>setEnterPassword(event.target.value)}  placeholder="Enter Password" />
           <p className="remember">Remember Me</p>
-          <button className="signinbutton">SignIn </button>
+          <button className="signinbutton" onClick={handlesubmit()}>SignIn </button>
 
         <p className="forgot"> <Link to=""> Forgot Password ?</Link> </p>
         <div className="divisionclass">
