@@ -1,0 +1,102 @@
+.heading {
+    text-align: center;
+    font-size: 35px;
+    padding-top: 11px;
+    color: black;
+    margin-top: 0;
+}
+.backgroundcss {
+    justify-content: center;
+    display: flex;
+    background-color: white;
+    gap: 10px;
+    
+}
+
+p {
+    text-align: center;
+    color: gray;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 12px;
+    margin-top: 5px;
+    font-size: medium;
+}
+
+.middlewareform {
+
+    padding: 60px;
+    background-color: #e1e1e161;
+    width: 100%;
+    max-width: 420px;
+    border-radius: 10px;
+    margin: 0 auto;
+    margin-bottom: 150px;
+    border: 1px solid gainsboro;
+    margin-top: 58px;
+}
+
+.signupbutton {
+    width: 100%;
+    padding: 15px;
+    background-color: #282828;
+    color: white;
+}
+
+input {
+    width: 92%;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: gainsboro;
+    border: 1px solid gainsboro;
+}
+
+.remember{
+    text-align: start;
+}
+
+
+.signinbutton {
+    width: 100%;
+    padding: 15px;
+    background-color: #282828;
+    color: white;
+    
+}
+.divisionclass {
+    text-align: center;
+    margin: 0 0 20px;
+    color: black;
+    position: relative;
+    display: flex;
+    font-size: 20px;
+;
+    align-items: center;
+    grid-area: 1 / span 2;
+}
+.divisionclass:after, .divisionclass:before {
+    content: "";
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color:black;
+}
+
+.facebook{
+    margin-right: 90px;
+    padding: 20px;
+    font-size: 15px;
+    width: 35%;
+}
+
+.google{
+    padding: 20px;
+    font-size: 15px;
+    width: 35%;
+}
+
+.forgot, .forgot a{
+    text-align: start;
+    color: gray!important;
+}
