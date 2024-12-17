@@ -9,8 +9,8 @@ function Login() {
     const [EnterPassword,setEnterPassword] = useState("");
 
     const handlesubmit=(e)=>{
-      e.preventDefault();
-      localStorage.clear();
+      // e.preventDefault();
+      // localStorage.clear();
       let userData = {
        EnteryourEmailid : EnteryourEmailid,
        EnteryourPassword : EnteryourPassword,
