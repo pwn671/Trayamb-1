@@ -1,5 +1,5 @@
-import React from "react";
 import { Link } from "react-router-dom";
+import React, {useState} from "react";
 import "./Commonouterpage.css"
 import { FaFacebookF } from "react-icons/fa";
 import { FaGoogle } from "react-icons/fa";
@@ -8,7 +8,14 @@ function Login() {
     const [EnteryourEmailid,setEnteryourEmailid] = useState("");
     const [EnterPassword,setEnterPassword] = useState("");
 
-    const handlesubmit=()=>{
+    const handlesubmit=(e)=>{
+      e.preventDefault();
+      localStorage.clear();
+      let userData = {
+       EnteryourEmailid : EnteryourEmailid,
+       EnteryourPassword : EnteryourPassword,
+      };
+      localStorage.getItem("userInfo", JSON.stringify(userData));
       console.log(EnteryourEmailid,EnterPassword)
     }
   return (
