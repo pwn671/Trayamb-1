@@ -100,21 +100,22 @@ input {
     text-align: start;
     color: gray!important;
 }
-/* .main{
-    
-} */
 
-h1 {
-    text-align: center;
-    font-size: 57px;
-    /* margin-top: 143px; */
-    margin-bottom: 220px;
+h1  {   display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 500;
+        font-size: 45px;
 }
-.container{
-     padding: 20px;
-     width: 50%;
+.cont{
+       display: flex;    
+       justify-content: center;
+       gap: 12px;
+    }  
      
-}
+    
+     
+
 h2{
     font-size: 40px;
     color: white;
@@ -177,14 +178,19 @@ h4{
         background-color: yellowgreen;
     }
 
-   .xxxx{
-
-    display: flex;
+     .xxxx{
+     padding-top: 45px;
+     display: flex;
     /* background-color: red; */
     
    }
    .leftparent {
     margin-left: 20px;
+}
+
+.leftparent h1{
+    margin-bottom: 200px;
+    margin-top: 110px;
 }
 h5{
     font-size: 18px;
@@ -195,3 +201,67 @@ h5{
     margin-top: -138px;
 }
 
+.parenthomediv{
+    width: 100%;
+    background-color: #444;
+}
+ .leftparent svg{
+        font-size: 27px;
+        padding: 20px;
+     
+    
+}
+
+ .mdicon{
+    width: 65px;
+    height: 65px;
+    background-color: #bb9a65;
+    border-radius: 50px;
+
+}
+.leftparent h5{
+    margin-left: 162px;
+}
+
+.main.withcome {
+   
+    background-image: url(https://innovatek-next.vercel.app/assets/images/background/page-title-bg.jpg);
+}
+.main.withcome {
+        background-repeat: no-repeat;
+        background-position: 50%;
+        background-size: cover;
+        margin-bottom: 60px;
+        /* margin-top: 86px; */
+        padding: 80px 0 119px;
+        position: relative;
+        padding-bottom: 200px;
+    }
+
+.main.withcome:before {
+    position: absolute;
+    left: 0;
+    top: 0;
+  
+    height: 100%;
+    width: 100%;
+    background: #131313;
+    opacity: .8;
+    content: "";
+
+}
+.contact{
+        position: absolute;
+        width: 100%;
+        
+    
+}
+ .cont p {
+    text-align: center;
+    color: white;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 12px;
+    margin-top: 5px;
+    font-size: medium;
+}
