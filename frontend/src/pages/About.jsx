@@ -1,11 +1,8 @@
-import React from 'react'
-import Withcome from '../components/withcome'
+import React from "react";
+import Withcome from "../components/withcome";
 
 const About = () => {
-  return (
-<Withcome name="About"/>
-    
-  )
-}
+  return <Withcome name="About" />;
+};
 
-export default About
+export default About;

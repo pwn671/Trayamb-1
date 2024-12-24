@@ -1,12 +1,8 @@
-import React from 'react'
-import Withcome from '../components/withcome'
+import React from "react";
+import Withcome from "../components/withcome";
 
 function Service() {
-  return (
-  
-<Withcome name="Service"/>
-    
-  )
+  return <Withcome name="Service" />;
 }
 
-export default Service
+export default Service;

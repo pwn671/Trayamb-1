@@ -1,11 +1,8 @@
-import React from 'react'
-import Withcome from '../components/withcome'
+import React from "react";
+import Withcome from "../components/withcome";
 
 function Projects() {
-  return (
-<Withcome name="Projects"/>
-    
-  )
+  return <Withcome name="Projects" />;
 }
 
-export default Projects
+export default Projects;
