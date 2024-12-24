@@ -1,10 +1,10 @@
 import React from 'react'
+import Withcome from '../components/withcome'
 
 function Projects() {
   return (
-    <div>
-      Projects
-    </div>
+<Withcome name="Projects"/>
+    
   )
 }
 

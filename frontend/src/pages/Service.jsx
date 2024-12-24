@@ -1,10 +1,11 @@
 import React from 'react'
+import Withcome from '../components/withcome'
 
 function Service() {
   return (
-    <div>
-Service
-    </div>
+  
+<Withcome name="Service"/>
+    
   )
 }
 

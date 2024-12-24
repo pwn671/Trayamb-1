@@ -1,10 +1,10 @@
 import React from 'react'
+import Withcome from '../components/withcome'
 
 const About = () => {
   return (
-    <div>
-      About
-    </div>
+<Withcome name="About"/>
+    
   )
 }
 
