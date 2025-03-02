@@ -1,5 +1,5 @@
 import React from "react";
-import "./services.css";
+import "./Services.css";
 import services from "./services.json";
 import { BsArrowRight } from "react-icons/bs";
 import { AiOutlineArrowRight } from "react-icons/ai";
