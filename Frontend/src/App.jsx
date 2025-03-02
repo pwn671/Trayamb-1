@@ -16,7 +16,7 @@ import { peristor, store } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 import { Toaster } from "react-hot-toast";
 import Profile from "./Pages/Profile";
-import About from "./pages/about/About.jsx";
+import About from "./pages/about/About";
 import Project from "./pages/project/Project";
 import Services from "./pages/services/Services";
 import Blogs from "./pages/blog/Blog";
