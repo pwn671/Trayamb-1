@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./Pages/home/Home";
+import Home from "./Pages/Home/Home";
 import Blog from "./Pages/Blog";
 
 import UserLayout from "./Layout/UserLayout";
@@ -16,12 +16,12 @@ import { peristor, store } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 import { Toaster } from "react-hot-toast";
 import Profile from "./Pages/Profile";
-import About from "./Pages/about/About";
-import Project from "./Pages/project/Project";
-import Services from "./Pages/services/Services";
-import Blogs from "./Pages/blog/Blog";
-import Contact from "./Pages/contact/Contact";
-import AllBlog from "./Pages/blog/Allblog";
+import About from "./Pages/About/About";
+import Project from "./Pages/Project/Project";
+import Services from "./Pages/Services/Services";
+import Blogs from "./Pages/Blog/Blog";
+import Contact from "./Pages/Contact/Contact";
+import AllBlog from "./Pages/Blog/Allblog";
 import AboutContentManager from "./Pages/Admin/AboutContentManager";
 import ContactList from "./Pages/Admin/ContactList";
 import ProjectManagement from "./Pages/Admin/ProjectManagement";
