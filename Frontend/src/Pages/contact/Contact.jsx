@@ -112,7 +112,7 @@
 // export default Contact;
 import React, { useState } from "react";
 import { submitContact } from "../../Services/contactService";
-import "./contact.css";
+import "./Contact.css";
 import { GiWorld } from "react-icons/gi";
 import { HiOutlineMail } from "react-icons/hi";
 import { BsTelephone, BsArrowRight } from "react-icons/bs";

@@ -1,5 +1,4 @@
 
-
 import React, { useEffect, useState } from "react";
 import { getAbout } from "../../services/AboutService";
 import "./About.css";
@@ -52,7 +51,9 @@ function About() {
                   <p>{section.text}</p>
                   <button>
                     Our Concept
-                    <BsArrowRight style={{ color: "#CDA274", marginLeft: "3%" }} />
+                    <BsArrowRight
+                      style={{ color: "#CDA274", marginLeft: "3%" }}
+                    />
                   </button>
                 </div>
                 <div className="concept-img">
@@ -62,7 +63,9 @@ function About() {
                       alt={section.title}
                       onError={(e) => {
                         e.target.style.display = "none";
-                        console.warn(`Image failed to load for section: ${section.title}`);
+                        console.warn(
+                          `Image failed to load for section: ${section.title}`
+                        );
                       }}
                     />
                   )}
@@ -77,7 +80,9 @@ function About() {
                       alt={section.title}
                       onError={(e) => {
                         e.target.style.display = "none";
-                        console.warn(`Image failed to load for section: ${section.title}`);
+                        console.warn(
+                          `Image failed to load for section: ${section.title}`
+                        );
                       }}
                     />
                   )}
@@ -87,7 +92,9 @@ function About() {
                   <p>{section.text}</p>
                   <button>
                     Our Concept
-                    <BsArrowRight style={{ color: "#CDA274", marginLeft: "3%" }} />
+                    <BsArrowRight
+                      style={{ color: "#CDA274", marginLeft: "3%" }}
+                    />
                   </button>
                 </div>
               </>

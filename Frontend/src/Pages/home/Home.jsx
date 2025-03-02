@@ -1,7 +1,7 @@
 import React from "react";
 import SimpleSlider from "../../components/slider/Slider";
-import "./home.css";
-import "./homeResponsive.css";
+import "./Home.css";
+import "./HomeResponsive.css";
 import photoBg from "../../images/backgroung/homeBg.jpg";
 import { Link } from "react-router-dom";
 import { BsArrowRight, BsTelephone } from "react-icons/bs";
@@ -183,18 +183,15 @@ function Home() {
           <div className="container">
             <div className="row">
               <div className="col-12 col-lg-12">
-              <h1>Follow Our Projects</h1>
-          <p>
-            It is a long established fact that a reader will be distracted by
-            the of readable content of a page lookings at its layouts.
-          </p>
+                <h1>Follow Our Projects</h1>
+                <p>
+                  It is a long established fact that a reader will be distracted
+                  by the of readable content of a page lookings at its layouts.
+                </p>
               </div>
-              <Homeproject/>
-   
-      
+              <Homeproject />
             </div>
           </div>
-        
         </div>
       </div>
       <div className="home-experience">

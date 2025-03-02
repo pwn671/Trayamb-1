@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import Sidebar from "../Components/Dashboard/Sidebar";
 import { useSelector } from "react-redux";
-import Header from "../../../frontend/src/components/Header";
-import Footer from "../../../frontend-old/src/components/Footer";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 export default function Adminlayout() {
   const navigate = useNavigate();

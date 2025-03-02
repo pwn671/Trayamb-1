@@ -1,5 +1,5 @@
 import React from "react";
-import "./projectCard.css";
+import "./ProjectCard.css";
 import { Link } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import { processImageUrl } from "../../utils/imageUtils";
