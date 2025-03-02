@@ -12,7 +12,7 @@ import AboutRoutes from "./routes/About.js";
 import UploadRoutes from "./routes/uploadRoutes.js";
 import ContactRoutes from './routes/Contact.js';
 import projectRoutes from './routes/Project.js';
-import uploadRoutes from './routes/uploadRoutes.js';
+
 dotenv.config()
 
 const PORT=process.env.PORT || 4000
