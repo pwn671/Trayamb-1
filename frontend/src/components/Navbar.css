@@ -1,11 +1,11 @@
 .navbar {
   background-color: #282828;
-  height: 80px;
+  /* height: 80px; */
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 1.2rem;
-  position: sticky;
+  position: sticky!important;
   top: 0;
   z-index: 20;
 }

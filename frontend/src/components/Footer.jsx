@@ -81,7 +81,7 @@ function Footer() {
             </div>
           </div>
         </div>
-        <div className="footer__wrp-bottom pt-60 pb-60">
+        <div className="footer__wrp-bottom pt-40 pb-50">
           <p>
             Lorem ipsum dolor sit amet, cosectetur adip Duis convallis sit amet
             purus ac&nbsp;dapibus.
