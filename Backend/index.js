@@ -9,7 +9,7 @@ import DashboardRoutes from './routes/Dashboard.js'
 import CommentRoutes from './routes/Comments.js'
 import PublicRoutes from './routes/Public.js'
 import AboutRoutes from "./routes/About.js";
-import UploadRoutes from "./routes/uploadRoutes.js";
+import UploadRoutes from "./routes/UploadRoutes.js";
 import ContactRoutes from './routes/Contact.js';
 import projectRoutes from './routes/Project.js';
 
