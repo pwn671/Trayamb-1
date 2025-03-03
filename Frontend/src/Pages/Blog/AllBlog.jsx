@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./blog.css";
+import "./Blog.css";
 import { IoIosArrowForward } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
 import { BaseUrl, get } from "../../services/Endpoint";
