@@ -21,7 +21,7 @@ import Project from "./Pages/Project/Project";
 import Services from "./Pages/Services/Services";
 import Blogs from "./Pages/Blog/Blog";
 import Contact from "./Pages/Contact/Contact";
-import AllBlog from "./Pages/Blog/Allblog";
+import AllBlog from "./Pages/Blog/AllBlog";
 import AboutContentManager from "./Pages/Admin/AboutContentManager";
 import ContactList from "./Pages/Admin/ContactList";
 import ProjectManagement from "./Pages/Admin/ProjectManagement";
