@@ -10,9 +10,9 @@ import { FaTrash, FaUpload } from "react-icons/fa";
 // Safely get environment variable
 const getEnvVariable = (key, defaultValue) => {
   try {
-    return window._env_ && window._env_[key] 
-      ? window._env_[key] 
-      : (process.env[key] || defaultValue);
+    return window._env_ && window._env_[key]
+      ? window._env_[key]
+      : process.env[key] || defaultValue;
   } catch (error) {
     console.warn(`Error accessing environment variable ${key}:`, error);
     return defaultValue;
@@ -46,13 +46,14 @@ function AboutContentManager() {
           title: data.title || "",
           quote: data.quote || "",
           quoteAuthor: data.quoteAuthor || "",
-          sections: data.sections && data.sections.length > 0 
-            ? data.sections.map(section => ({
-                title: section.title || "",
-                text: section.text || "",
-                imageUrl: section.imageUrl || ""
-              }))
-            : [{ title: "", text: "", imageUrl: "" }]
+          sections:
+            data.sections && data.sections.length > 0
+              ? data.sections.map((section) => ({
+                  title: section.title || "",
+                  text: section.text || "",
+                  imageUrl: section.imageUrl || "",
+                }))
+              : [{ title: "", text: "", imageUrl: "" }],
         };
 
         setAboutData(formattedData);
@@ -75,7 +76,7 @@ function AboutContentManager() {
         title: "",
         quote: "",
         quoteAuthor: "",
-        sections: [{ title: "", text: "", imageUrl: "" }]
+        sections: [{ title: "", text: "", imageUrl: "" }],
       });
       setIsEditing(false);
     } finally {
@@ -99,7 +100,10 @@ function AboutContentManager() {
   };
 
   // Define base API URL using the new method
-  const BASE_API_URL = getEnvVariable('REACT_APP_API_BASE_URL', 'http://localhost:5000');
+  const BASE_API_URL = getEnvVariable(
+    "KEACT_APP_API_BASE_UR",
+    "http://localhost:5000"
+  );
 
   const handleImageUpload = async (e, sectionIndex) => {
     const file = e.target.files[0];
@@ -110,7 +114,9 @@ function AboutContentManager() {
     const maxSize = 5 * 1024 * 1024; // 5MB
 
     if (!validTypes.includes(file.type)) {
-      setError("Invalid file type. Please upload JPEG, PNG, GIF, or WebP images.");
+      setError(
+        "Invalid file type. Please upload JPEG, PNG, GIF, or WebP images."
+      );
       return;
     }
 
@@ -132,10 +138,10 @@ function AboutContentManager() {
 
       // Upload to server
       const { imageUrl } = await uploadImage(file);
-      
+
       // Ensure the imageUrl is a full URL
-      const fullImageUrl = imageUrl.startsWith('http') 
-        ? imageUrl 
+      const fullImageUrl = imageUrl.startsWith("http")
+        ? imageUrl
         : `${BASE_API_URL}${imageUrl}`;
 
       setAboutData((prev) => {
@@ -188,7 +194,9 @@ function AboutContentManager() {
 
     // Enhanced validation
     if (!aboutData.title || !aboutData.quote || !aboutData.quoteAuthor) {
-      setError("Please fill in all required fields: Title, Quote, and Quote Author");
+      setError(
+        "Please fill in all required fields: Title, Quote, and Quote Author"
+      );
       return;
     }
 
@@ -198,7 +206,9 @@ function AboutContentManager() {
     }
 
     // Validate sections
-    const invalidSection = aboutData.sections.find((section) => !section.title || !section.text);
+    const invalidSection = aboutData.sections.find(
+      (section) => !section.title || !section.text
+    );
     if (invalidSection) {
       setError("All sections must have a title and text");
       return;
@@ -215,14 +225,14 @@ function AboutContentManager() {
           title: aboutData.title,
           quote: aboutData.quote,
           quoteAuthor: aboutData.quoteAuthor,
-          sections: aboutData.sections
+          sections: aboutData.sections,
         });
       } else {
         result = await createAbout({
           title: aboutData.title,
           quote: aboutData.quote,
           quoteAuthor: aboutData.quoteAuthor,
-          sections: aboutData.sections
+          sections: aboutData.sections,
         });
       }
 
@@ -235,10 +245,11 @@ function AboutContentManager() {
     } catch (err) {
       console.error("Error saving data:", err);
       // More detailed error handling
-      const errorMessage = err.response?.data?.error || 
-                           err.response?.data?.details || 
-                           err.message || 
-                           "Failed to save content";
+      const errorMessage =
+        err.response?.data?.error ||
+        err.response?.data?.details ||
+        err.message ||
+        "Failed to save content";
       setError(errorMessage);
     } finally {
       setLoading(false);
@@ -267,37 +278,81 @@ function AboutContentManager() {
 
         <div>
           <label>Quote</label>
-          <textarea name="quote" value={aboutData.quote} onChange={handleInputChange} required />
+          <textarea
+            name="quote"
+            value={aboutData.quote}
+            onChange={handleInputChange}
+            required
+          />
         </div>
 
         <div>
           <label>Quote Author</label>
-          <input type="text" name="quoteAuthor" value={aboutData.quoteAuthor} onChange={handleInputChange} required />
+          <input
+            type="text"
+            name="quoteAuthor"
+            value={aboutData.quoteAuthor}
+            onChange={handleInputChange}
+            required
+          />
         </div>
 
         {aboutData.sections.map((section, index) => (
           <div key={index} className="section-container">
             <h3>Section {index + 1}</h3>
-            <input type="text" name="title" placeholder="Section Title" value={section.title} onChange={(e) => handleInputChange(e, index)} required />
-            <textarea name="text" placeholder="Section Text" value={section.text} onChange={(e) => handleInputChange(e, index)} required />
+            <input
+              type="text"
+              name="title"
+              placeholder="Section Title"
+              value={section.title}
+              onChange={(e) => handleInputChange(e, index)}
+              required
+            />
+            <textarea
+              name="text"
+              placeholder="Section Text"
+              value={section.text}
+              onChange={(e) => handleInputChange(e, index)}
+              required
+            />
 
             <div className="image-upload-container">
-              <input type="file" id={`image-upload-${index}`} accept="image/*" onChange={(e) => handleImageUpload(e, index)} hidden />
-              <label htmlFor={`image-upload-${index}`} className="image-upload-label">
+              <input
+                type="file"
+                id={`image-upload-${index}`}
+                accept="image/*"
+                onChange={(e) => handleImageUpload(e, index)}
+                hidden
+              />
+              <label
+                htmlFor={`image-upload-${index}`}
+                className="image-upload-label"
+              >
                 <FaUpload /> Upload Image
               </label>
 
               {(imagePreview[index] || section.imageUrl) && (
                 <div className="image-preview">
-                  <img src={imagePreview[index] || section.imageUrl} alt={`Section ${index + 1}`} />
-                  <button type="button" onClick={() => removeImage(index)} className="remove-image-btn">
+                  <img
+                    src={imagePreview[index] || section.imageUrl}
+                    alt={`Section ${index + 1}`}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => removeImage(index)}
+                    className="remove-image-btn"
+                  >
                     <FaTrash /> Remove
                   </button>
                 </div>
               )}
             </div>
 
-            <button type="button" onClick={() => removeSection(index)} className="remove-section-btn">
+            <button
+              type="button"
+              onClick={() => removeSection(index)}
+              className="remove-section-btn"
+            >
               Remove Section
             </button>
           </div>
