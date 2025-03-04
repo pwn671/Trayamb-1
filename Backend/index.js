@@ -24,8 +24,12 @@ app.get('/',(req,res)=>{
 })
 app.use(express.static('public'))
 app.use(cookieParser())
+// const corsOptoins={
+//     origin:true,
+//     credentials:true
+// }
 const corsOptoins={
-    origin:true,
+    origin:["https://trayambassociates.netlify.app"],
     credentials:true
 }
 app.use(cors(corsOptoins))
