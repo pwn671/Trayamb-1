@@ -6,7 +6,7 @@ import { removeUser } from "../redux/AuthSlice";
 import toast from "react-hot-toast";
 import "./NavBar.css";
 import { CodeIcon, HamburgetMenuClose, HamburgetMenuOpen } from "./Icons";
-import logo from "../assets/logo.png";
+import logo from "../assets/Logo.png";
 
 export default function Navbar() {
   const [click, setClick] = useState(false);
