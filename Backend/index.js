@@ -34,7 +34,7 @@ app.use(cookieParser())
 // }
 // app.use(cors(corsOptoins))
 
-app.use(cors({ origin: 'https://trayambassociates2.netlify.app/' }));
+app.use(cors({ origin: 'https://trayambassociates.netlify.app/' }));
 app.use('/auth',AuthRoutes)
 app.use('/blog',BlogRoutes)
 app.use('/dashboard',DashboardRoutes)
