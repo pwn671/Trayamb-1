@@ -1,5 +1,6 @@
 import axios from "axios";
-export const BaseUrl = import.meta.env.REACT_APP_API_BASE_URL;
+// export const BaseUrl = import.meta.env.REACT_APP_API_BASE_URL;
+export const BaseUrl = import.meta.env.VITE_API_BASE_URL;
 const instance = axios.create({
   baseURL: BaseUrl,
   // headers: {
