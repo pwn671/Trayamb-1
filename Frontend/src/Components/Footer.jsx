@@ -1,7 +1,7 @@
 import React from "react";
 import shape1 from "../assets/shape/footer-shape1.png";
 import shape2 from "../assets/shape/footer-shape2.png";
-import logo from "../assets/logo.png";
+import logo from "../assets/Logo.png";
 function Footer() {
   return (
     <footer className="footer-area">
