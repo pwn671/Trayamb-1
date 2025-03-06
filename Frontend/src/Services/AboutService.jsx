@@ -23,7 +23,7 @@ const getEnvVariable = (key, defaultValue) => {
 
 const API_URL = "http://localhost:5000/api/about";
 const BASE_API_URL = getEnvVariable(
-  "KEACT_APP_API_BASE_UR",
+  "REACT_APP_API_BASE_UR",
   "http://localhost:5000"
 );
 
