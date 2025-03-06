@@ -29,7 +29,7 @@ app.use(cookieParser())
 //     credentials:true
 // }
   const corsOptoins={
-  origin: 'https://trayambassociates.netlify.app',
+  origin: 'https://trayambassociates2.netlify.app',
     credentials:true
 }
 app.use(cors(corsOptoins))
