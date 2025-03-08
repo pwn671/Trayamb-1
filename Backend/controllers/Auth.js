@@ -108,6 +108,8 @@ const Login = async (req, res) => {
             // httpOnly: true,
              httpsOnly: true,
             secure: true,
+             sameSite: "None", // Cross-site cookie
+              path: "/", // Ensure it's accessible on all routes
             maxAge: 3 * 24 * 60 * 60 * 1000 // 3 days in milliseconds
         });
         
