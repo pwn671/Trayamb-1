@@ -24,21 +24,21 @@ app.get('/',(req,res)=>{
 })
 app.use(express.static('public'))
 app.use(cookieParser())
-// const corsOptoins={
-//     origin:true,
-//     credentials:true
-// }
+const corsOptoins={
+    origin:true,
+    credentials:true
+}
 //   const corsOptoins={
 //   origin: 'https://trayambassociates.netlify.app',
 //     credentials:true
 // }
-// app.use(cors(corsOptoins))
-app.use(
-  cors({
-    origin: "https://trayambassociates.netlify.app", // Replace with your Netlify domain
-    credentials: true, // Allow credentials (cookies, authorization headers)
-  })
-);
+app.use(cors(corsOptoins))
+// app.use(
+//   cors({
+//     origin: "https://trayambassociates.netlify.app", // Replace with your Netlify domain
+//     credentials: true, // Allow credentials (cookies, authorization headers)
+//   })
+// );
 // app.use(cors({ origin: 'https://trayambassociates.netlify.app' }));
 app.use('/auth',AuthRoutes)
 app.use('/blog',BlogRoutes)
