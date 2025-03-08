@@ -35,7 +35,7 @@ app.use(cookieParser())
 // app.use(cors(corsOptoins))
 app.use(
   cors({
-    origin: "https://trayambassociates.netlify.app", // Replace with your Netlify domain
+    origin: "https://trayambassociates.netlify.app/", // Replace with your Netlify domain
     credentials: true, // Allow credentials (cookies, authorization headers)
   })
 );
