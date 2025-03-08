@@ -9,7 +9,7 @@ const getEnvVariable = (key, defaultValue) => {
 };
 
 const BASE_API_URL = getEnvVariable(
-  "REACT_APP_API_BASE_URL", 
+  "VITE_API_BASE_URL", 
   "http://localhost:5000"
 );
 
