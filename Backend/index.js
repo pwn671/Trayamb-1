@@ -28,12 +28,17 @@ app.use(cookieParser())
 //     origin:true,
 //     credentials:true
 // }
-  const corsOptoins={
-  origin: 'https://trayambassociates.netlify.app',
-    credentials:true
-}
-app.use(cors(corsOptoins))
-
+//   const corsOptoins={
+//   origin: 'https://trayambassociates.netlify.app',
+//     credentials:true
+// }
+// app.use(cors(corsOptoins))
+app.use(
+  cors({
+    origin: "https://trayambassociates.netlify.app", // Replace with your Netlify domain
+    credentials: true, // Allow credentials (cookies, authorization headers)
+  })
+);
 // app.use(cors({ origin: 'https://trayambassociates.netlify.app' }));
 app.use('/auth',AuthRoutes)
 app.use('/blog',BlogRoutes)
