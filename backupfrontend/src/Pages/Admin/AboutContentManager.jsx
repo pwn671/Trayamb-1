@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
+import axios from 'axios';
 import {
-  getAbout,
-  updateAbout,
-  createAbout,
-  uploadImage,
+  // getAbout,
+  // updateAbout,
+  // createAbout,
+  // uploadImage,
 } from "../../Services/AboutService";
 import { FaTrash, FaUpload } from "react-icons/fa";
 
@@ -16,6 +17,54 @@ const getEnvVariable = (key, defaultValue) => {
   } catch (error) {
     // console.warn(`Error accessing environment variable ${key}:`, error);
     return defaultValue;
+  }
+};
+
+const API_BASE_URL = getEnvVariable("VITE_API_BASE_URL", "http://localhost:5000");
+
+const fetchAboutData = async () => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/about`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching about data:', error);
+  }
+};
+
+const createAboutData = async (data) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/about`, data);
+    return response.data;
+  } catch (error) {
+    console.error('Error creating about data:', error);
+  }
+};
+
+const updateAboutData = async (id, data) => {
+  try {
+    const response = await axios.put(`${API_BASE_URL}/about/${id}`, data);
+    return response.data;
+  } catch (error) {
+    console.error('Error updating about data:', error);
+  }
+};
+
+const deleteAboutData = async (id) => {
+  try {
+    await axios.delete(`${API_BASE_URL}/about/${id}`);
+  } catch (error) {
+    console.error('Error deleting about data:', error);
+  }
+};
+
+const uploadImage = async (file) => {
+  try {
+    const formData = new FormData();
+    formData.append('image', file);
+    const response = await axios.post(`${API_BASE_URL}/upload-image`, formData);
+    return response.data;
+  } catch (error) {
+    console.error('Error uploading image:', error);
   }
 };
 
@@ -32,13 +81,7 @@ function AboutContentManager() {
   const [imagePreview, setImagePreview] = useState({});
 
   useEffect(() => {
-    fetchAboutData();
-  }, []);
-
-  const fetchAboutData = async () => {
-    try {
-      setLoading(true);
-      const data = await getAbout();
+    fetchAboutData().then((data) => {
       if (data) {
         // Ensure all required fields exist
         const formattedData = {
@@ -68,21 +111,8 @@ function AboutContentManager() {
         });
         setImagePreview(previews);
       }
-    } catch (err) {
-      console.error("Fetch error:", err);
-      setError("Failed to fetch data. You can create new content.");
-      // Reset to initial state if fetch fails
-      setAboutData({
-        title: "",
-        quote: "",
-        quoteAuthor: "",
-        sections: [{ title: "", text: "", imageUrl: "" }],
-      });
-      setIsEditing(false);
-    } finally {
-      setLoading(false);
-    }
-  };
+    });
+  }, []);
 
   const handleInputChange = (e, sectionIndex = null) => {
     const { name, value } = e.target;
@@ -98,12 +128,6 @@ function AboutContentManager() {
       return { ...prev, sections: updatedSections };
     });
   };
-
-  // Define base API URL using the new method
-  const BASE_API_URL = getEnvVariable(
-    "VITE_API_BASE_URL",
-    "http://localhost:5000"
-  );
 
   const handleImageUpload = async (e, sectionIndex) => {
     const file = e.target.files[0];
@@ -142,7 +166,7 @@ function AboutContentManager() {
       // Ensure the imageUrl is a full URL
       const fullImageUrl = imageUrl.startsWith("http")
         ? imageUrl
-        : `${BASE_API_URL}${imageUrl}`;
+        : `${API_BASE_URL}${imageUrl}`;
 
       setAboutData((prev) => {
         const updatedSections = [...prev.sections];
@@ -221,14 +245,14 @@ function AboutContentManager() {
       let result;
       // Modify the logic to handle both create and update scenarios
       if (aboutData._id) {
-        result = await updateAbout(aboutData._id, {
+        result = await updateAboutData(aboutData._id, {
           title: aboutData.title,
           quote: aboutData.quote,
           quoteAuthor: aboutData.quoteAuthor,
           sections: aboutData.sections,
         });
       } else {
-        result = await createAbout({
+        result = await createAboutData({
           title: aboutData.title,
           quote: aboutData.quote,
           quoteAuthor: aboutData.quoteAuthor,
