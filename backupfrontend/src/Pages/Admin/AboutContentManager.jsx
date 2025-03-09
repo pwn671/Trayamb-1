@@ -82,6 +82,7 @@ function AboutContentManager() {
 
   useEffect(() => {
     fetchAboutData().then((data) => {
+      console.log('Fetched data:', data); // Debugging log
       if (data) {
         // Ensure all required fields exist
         const formattedData = {
@@ -99,6 +100,7 @@ function AboutContentManager() {
               : [{ title: "", text: "", imageUrl: "" }],
         };
 
+        console.log('Formatted data:', formattedData); // Debugging log
         setAboutData(formattedData);
         setIsEditing(!!data._id);
 
@@ -110,6 +112,8 @@ function AboutContentManager() {
           }
         });
         setImagePreview(previews);
+      } else {
+        console.error('No data returned from fetch.');
       }
     });
   }, []);
