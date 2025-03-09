@@ -416,7 +416,7 @@ const getEnvVariable = (key, defaultValue) => {
   }
 };
 
-const API_BASE_URL = getEnvVariable("VITE_API_BASE_URL", "http://localhost:5000");
+const API_BASE_URL = getEnvVariable("VITE_API_BASE_URL", "https://trayamb.onrender.com");
 
 const fetchAboutData = async () => {
   try {
