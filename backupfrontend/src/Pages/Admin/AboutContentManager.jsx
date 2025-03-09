@@ -82,7 +82,7 @@ function AboutContentManager() {
   const [imagePreview, setImagePreview] = useState({});
 
   useEffect(() => {
-    fetchAboutData().then((data) => {
+    fetchAboutData().then((response.data) => {
       console.log('Fetched data:', response.data); // Debugging log
       if (data) {
         // Ensure all required fields exist
