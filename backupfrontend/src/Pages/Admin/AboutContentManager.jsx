@@ -24,7 +24,7 @@ const API_BASE_URL = getEnvVariable("VITE_API_BASE_URL", "http://localhost:5000"
 
 const fetchAboutData = async () => {
   try {
-    const response = await axios.get(`${API_BASE_URL}/about`);
+    const response = await axios.get(`${API_BASE_URL}/api/about`);
     return response.data;
   } catch (error) {
     console.error('Error fetching about data:', error);
@@ -33,7 +33,7 @@ const fetchAboutData = async () => {
 
 const createAboutData = async (data) => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/about`, data);
+    const response = await axios.post(`${API_BASE_URL}/api/about`, data);
     return response.data;
   } catch (error) {
     console.error('Error creating about data:', error);
@@ -42,7 +42,7 @@ const createAboutData = async (data) => {
 
 const updateAboutData = async (id, data) => {
   try {
-    const response = await axios.put(`${API_BASE_URL}/about/${id}`, data);
+    const response = await axios.put(`${API_BASE_URL}/api/about/${id}`, data);
     return response.data;
   } catch (error) {
     console.error('Error updating about data:', error);
@@ -51,7 +51,7 @@ const updateAboutData = async (id, data) => {
 
 const deleteAboutData = async (id) => {
   try {
-    await axios.delete(`${API_BASE_URL}/about/${id}`);
+    await axios.delete(`${API_BASE_URL}/api/about/${id}`);
   } catch (error) {
     console.error('Error deleting about data:', error);
   }
