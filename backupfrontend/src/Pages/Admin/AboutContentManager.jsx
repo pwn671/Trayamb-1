@@ -21,7 +21,7 @@ const getEnvVariable = (key, defaultValue) => {
 };
 
 const API_BASE_URL = getEnvVariable("VITE_API_BASE_URL", "http://localhost:5000");
-console.log(${API_BASE_URL}/api/about)
+console.log('api date:',${API_BASE_URL}/api/about)
 const fetchAboutData = async () => {
   try {
     const response = await axios.get(`${API_BASE_URL}/api/about`);
