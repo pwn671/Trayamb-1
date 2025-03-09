@@ -83,7 +83,7 @@ function AboutContentManager() {
 
   useEffect(() => {
     fetchAboutData().then((data) => {
-      console.log('Fetched data:', data); // Debugging log
+      console.log('Fetched data:', response.data); // Debugging log
       if (data) {
         // Ensure all required fields exist
         const formattedData = {
