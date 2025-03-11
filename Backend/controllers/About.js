@@ -188,7 +188,7 @@ export const uploadImage = async (req, res) => {
 
   try {
     // Generate full URL for the uploaded image
-    const baseUrl = process.env.BASE_URL || 'http://localhost:5000';
+    const baseUrl = process.env.BASE_URL || 'https://trayamb.onrender.com';
     const imageUrl = `${baseUrl}/uploads/${req.file.filename}`;
     
     res.json({ imageUrl });
