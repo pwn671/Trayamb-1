@@ -281,7 +281,7 @@ function ProjectManagement() {
                   alt={project.title}
                   className="project-image"
                   onError={(e) => {
-                    e.target.src = "../../images/default-project-image.jpg";
+                    e.target.src = "images/default-project-image.jpg";
                   }}
                 />
               )}
