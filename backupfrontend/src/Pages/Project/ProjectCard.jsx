@@ -31,7 +31,7 @@ const ProjectCard = ({ project = {} }) => {
               alt: e.target.alt,
               originalImage: image,
             });
-            e.target.src = ${Befaultimg};
+            e.target.src ={Befaultimg};
           }}
         />
       </div>
