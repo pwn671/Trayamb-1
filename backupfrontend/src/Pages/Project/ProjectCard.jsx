@@ -31,7 +31,7 @@ const ProjectCard = ({ project = {} }) => {
               alt: e.target.alt,
               originalImage: image,
             });
-            e.target.src ="images/default-project-image.jpg";
+            e.target.src ="assets/default-project-image.jpg";
           }}
         />
       </div>
