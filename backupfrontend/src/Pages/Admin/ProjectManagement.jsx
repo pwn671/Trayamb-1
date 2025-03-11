@@ -6,7 +6,7 @@ import {
   deleteProject,
 } from "../../Services/projectService";
 import { processImageUrl } from "../../utils/imageUtils";
-
+import Defaultimg from "../../images/default-project-image.jpg"
 // Safely get environment variable
 const getEnvVariable = (key, defaultValue) => {
   try {
@@ -281,7 +281,7 @@ function ProjectManagement() {
                   alt={project.title}
                   className="project-image"
                   onError={(e) => {
-                    e.target.src = "/default-project-image.jpg";
+                    e.target.src = ${Defaultimg};
                   }}
                 />
               )}
