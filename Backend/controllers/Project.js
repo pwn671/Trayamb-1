@@ -87,7 +87,7 @@ export const createProject = async (req, res) => {
     
     // Handle image upload (optional)
     const imagePath = req.file 
-      ? `/uploads/projects/${path.basename(req.file.path)}` 
+      ? `/images/projects/${path.basename(req.file.path)}` 
       : null;
     
     console.log('Stored Image Path:', imagePath);
