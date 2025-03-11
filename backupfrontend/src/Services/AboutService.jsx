@@ -168,7 +168,7 @@ const getEnvVariable = (key, defaultValue) => {
 
 const BASE_API_URL = getEnvVariable(
   "VITE_API_BASE_URL",
-  "https://trayamb.onrender.com"
+  "http://localhost:5000"
 );
 
 const apiClient = axios.create({
