@@ -105,14 +105,11 @@ const Login = async (req, res) => {
 
         const token = jwt.sign({ userId: FindUser._id }, process.env.JWT_SECRET);
         res.cookie('token', token, {
-            // httpOnly: true,
-             httpsOnly: true,
-            secure: true,
-             sameSite: "None", // Cross-site cookie
-              path: "/", // Ensure it's accessible on all routes
+            httpOnly: true,
+            secure: false,
             maxAge: 3 * 24 * 60 * 60 * 1000 // 3 days in milliseconds
         });
-        
+      
         return res.status(200).json({ success: true, message: "Login successfully", user: FindUser, token });
     } catch (error) {
         console.error('Error during login', error);
@@ -288,4 +285,3 @@ const updateProfile = async (req, res) => {
 };
 
 export {Register,Login,Logout,updateProfile}
-

@@ -87,7 +87,7 @@ export const createProject = async (req, res) => {
     
     // Handle image upload (optional)
     const imagePath = req.file 
-      ? `/images/projects/${path.basename(req.file.path)}` 
+      ? `/uploads/projects/${path.basename(req.file.path)}` 
       : null;
     
     console.log('Stored Image Path:', imagePath);
@@ -106,7 +106,7 @@ export const createProject = async (req, res) => {
     res.status(201).json({
       ...savedProject.toObject(),
       image: savedProject.image 
-        ? '${savedProject.image}` 
+        ? `http://localhost:5000${savedProject.image}` 
         : null
     });
   } catch (error) {
@@ -152,7 +152,7 @@ export const updateProject = async (req, res) => {
       removeOldImage(existingProject.image);
       
       // Set new image path
-      updateData.image = `/images/projects/${path.basename(req.file.path)}`;
+      updateData.image = `/uploads/projects/${path.basename(req.file.path)}`;
     }
     
     // Update project

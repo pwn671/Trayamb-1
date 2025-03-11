@@ -45,7 +45,7 @@ const AboutSchema = new mongoose.Schema({
             const urlPattern = /^(https?:\/\/).*\.(jpg|jpeg|png|gif|webp)$/i;
             
             // Check for local upload paths (starts with /uploads/ or full local path)
-            const localUploadPattern = /^(\/images\/|http:\/\/localhost:5000\/images\/).*\.(jpg|jpeg|png|gif|webp)$/i;
+            const localUploadPattern = /^(\/uploads\/|http:\/\/localhost:5000\/uploads\/).*\.(jpg|jpeg|png|gif|webp)$/i;
             
             return urlPattern.test(v) || localUploadPattern.test(v);
           },

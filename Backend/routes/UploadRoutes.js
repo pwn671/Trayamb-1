@@ -11,7 +11,7 @@ const __dirname = path.dirname(__filename);
 
 // Configure Multer for File Uploads
 const storage = multer.diskStorage({
-  destination: path.join(__dirname, "../images/"),
+  destination: path.join(__dirname, "../uploads/"),
   filename: (req, file, cb) => {
     cb(null, file.fieldname + "-" + Date.now() + path.extname(file.originalname));
   },
@@ -24,7 +24,7 @@ router.post("/", upload.single("image"), (req, res) => {
     if (!req.file) {
       return res.status(400).json({ message: "No file uploaded" });
     }
-    const imageUrl = `https://trayamb.onrender.com/images/${req.file.filename}`;
+    const imageUrl = `http://localhost:5000/uploads/${req.file.filename}`;
     res.json({ imageUrl });
   } catch (err) {
     res.status(500).json({ message: "Upload failed", error: err });
