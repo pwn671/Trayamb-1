@@ -15,7 +15,7 @@ const BASE_API_URL = getEnvVariable(
 
 export const processImageUrl = (image) => {
   // Detailed image URL processing
-  let processedImage = "/default-project-image.jpg";
+  let processedImage = "../../images/default-project-image.jpg";
 
   if (image) {
     // Full HTTP/HTTPS URLs
