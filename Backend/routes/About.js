@@ -12,7 +12,7 @@ const router = express.Router();
 
 // Multer for Image Upload
 const storage = multer.diskStorage({
-  destination: "./uploads/",
+  destination: "./images/",
   filename: (req, file, cb) => {
     cb(null, Date.now() + "-" + file.originalname);
   },
