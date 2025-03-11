@@ -327,7 +327,7 @@ export default function AllPost() {
       title: post.title,
       description: post.desc,
       image: null,
-      previewImage: `${BaseUrl}/images/${post.image}`,
+      previewImage: `${BaseUrl}/uploads/${post.image}`,
     });
     setShowEditor(true);
   };
@@ -374,7 +374,7 @@ export default function AllPost() {
           <div className="col-md-4 mb-4" key={post._id}>
             <div className="card h-100">
               <img
-                src={`${BaseUrl}/images/${post.image}`}
+                src={`${BaseUrl}/uploads/${post.image}`}
                 className="card-img-top"
                 alt={post.title}
               />
