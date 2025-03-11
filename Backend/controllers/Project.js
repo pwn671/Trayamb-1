@@ -106,7 +106,7 @@ export const createProject = async (req, res) => {
     res.status(201).json({
       ...savedProject.toObject(),
       image: savedProject.image 
-        ? `http://localhost:5000${savedProject.image}` 
+        ? ${savedProject.image}` 
         : null
     });
   } catch (error) {
