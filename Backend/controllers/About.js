@@ -189,7 +189,7 @@ export const uploadImage = async (req, res) => {
   try {
     // Generate full URL for the uploaded image
     const baseUrl = process.env.BASE_URL || 'http://localhost:5000';
-    const imageUrl = `${baseUrl}/uploads/${req.file.filename}`;
+    const imageUrl = `${baseUrl}/images/${req.file.filename}`;
     
     res.json({ imageUrl });
   } catch (error) {
