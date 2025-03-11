@@ -401,57 +401,31 @@
 // }
 
 // export default AboutContentManager;
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FaTrash, FaUpload } from "react-icons/fa";
 
-// Safely get environment variable
-const getEnvVariable = (key, defaultValue) => {
-  try {
-    return window._env_ && window._env_[key]
-      ? window._env_[key]
-      : process.env[key] || defaultValue;
-  } catch (error) {
-    return defaultValue;
-  }
-};
-
-const API_BASE_URL = getEnvVariable("VITE_API_BASE_URL", "https://trayamb.onrender.com");
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "https://trayamb.onrender.com";
 
 const fetchAboutData = async () => {
   try {
     const response = await axios.get(`${API_BASE_URL}/api/about`);
-    console.log("Fetched data:", response.data); // ✅ Fix logging error
     return response.data;
   } catch (error) {
     console.error("Error fetching about data:", error);
+    return null;
   }
 };
 
-const createAboutData = async (data) => {
+const saveAboutData = async (data, isEditing) => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/api/about`, data);
+    const url = isEditing ? `${API_BASE_URL}/api/about/${data._id}` : `${API_BASE_URL}/api/about`;
+    const method = isEditing ? "put" : "post";
+    const response = await axios({ method, url, data });
     return response.data;
   } catch (error) {
-    console.error("Error creating about data:", error);
-  }
-};
-
-const updateAboutData = async (id, data) => {
-  try {
-    const response = await axios.put(`${API_BASE_URL}/api/about/${id}`, data);
-    return response.data;
-  } catch (error) {
-    console.error("Error updating about data:", error);
-  }
-};
-
-const deleteAboutData = async (id) => {
-  try {
-    await axios.delete(`${API_BASE_URL}/api/about/${id}`);
-  } catch (error) {
-    console.error("Error deleting about data:", error);
+    console.error("Error saving about data:", error);
+    return null;
   }
 };
 
@@ -460,228 +434,84 @@ const uploadImage = async (file) => {
     const formData = new FormData();
     formData.append("image", file);
     const response = await axios.post(`${API_BASE_URL}/upload-image`, formData);
-    return response.data;
+    return response.data.imageUrl;
   } catch (error) {
     console.error("Error uploading image:", error);
+    return "";
   }
 };
 
 function AboutContentManager() {
-  const [aboutData, setAboutData] = useState({
-    title: "",
-    quote: "",
-    quoteAuthor: "",
-    sections: [{ title: "", text: "", imageUrl: "" }],
-  });
+  const [aboutData, setAboutData] = useState({ title: "", quote: "", quoteAuthor: "", sections: [{ title: "", text: "", imageUrl: "" }] });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
-  const [imagePreview, setImagePreview] = useState({});
 
   useEffect(() => {
     fetchAboutData().then((data) => {
       if (data) {
-        const formattedData = {
-          _id: data._id || null,
-          title: data.title || "",
-          quote: data.quote || "",
-          quoteAuthor: data.quoteAuthor || "",
-          sections:
-            data.sections?.length > 0
-              ? data.sections.map((section) => ({
-                  title: section.title || "",
-                  text: section.text || "",
-                  imageUrl: section.imageUrl || "",
-                }))
-              : [{ title: "", text: "", imageUrl: "" }],
-        };
-
-        setAboutData(formattedData);
+        setAboutData(data);
         setIsEditing(!!data._id);
-
-        const previews = {};
-        formattedData.sections.forEach((section, index) => {
-          if (section.imageUrl) {
-            previews[index] = section.imageUrl;
-          }
-        });
-        setImagePreview(previews);
       }
+      setLoading(false);
     });
   }, []);
 
-  const handleInputChange = (e, sectionIndex = null) => {
+  const handleInputChange = (e, index = null) => {
     const { name, value } = e.target;
     setAboutData((prev) => {
-      if (sectionIndex === null) {
-        return { ...prev, [name]: value };
-      }
-      const updatedSections = [...prev.sections];
-      updatedSections[sectionIndex] = {
-        ...updatedSections[sectionIndex],
-        [name]: value,
-      };
-      return { ...prev, sections: updatedSections };
+      if (index === null) return { ...prev, [name]: value };
+      const sections = [...prev.sections];
+      sections[index] = { ...sections[index], [name]: value };
+      return { ...prev, sections };
     });
   };
 
-  const handleImageUpload = async (e, sectionIndex) => {
+  const handleImageUpload = async (e, index) => {
     const file = e.target.files[0];
     if (!file) return;
-
-    try {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImagePreview((prev) => ({
-          ...prev,
-          [sectionIndex]: reader.result,
-        }));
-      };
-      reader.readAsDataURL(file);
-
-      const { imageUrl } = await uploadImage(file);
-      const fullImageUrl = imageUrl.startsWith("http")
-        ? imageUrl
-        : `${API_BASE_URL}${imageUrl}`;
-
-      setAboutData((prev) => {
-        const updatedSections = [...prev.sections];
-        updatedSections[sectionIndex].imageUrl = fullImageUrl;
-        return { ...prev, sections: updatedSections };
-      });
-    } catch (err) {
-      setError(err.message || "Image upload failed");
-    }
-  };
-
-  const removeImage = (sectionIndex) => {
+    const imageUrl = await uploadImage(file);
     setAboutData((prev) => {
-      const updatedSections = [...prev.sections];
-      updatedSections[sectionIndex].imageUrl = "";
-      return { ...prev, sections: updatedSections };
-    });
-
-    setImagePreview((prev) => {
-      const newPreviews = { ...prev };
-      delete newPreviews[sectionIndex];
-      return newPreviews;
-    });
-  };
-
-  const addSection = () => {
-    setAboutData((prev) => ({
-      ...prev,
-      sections: [...prev.sections, { title: "", text: "", imageUrl: "" }],
-    }));
-  };
-
-  const removeSection = (indexToRemove) => {
-    setAboutData((prev) => ({
-      ...prev,
-      sections: prev.sections.filter((_, index) => index !== indexToRemove),
-    }));
-
-    setImagePreview((prev) => {
-      const newPreviews = { ...prev };
-      delete newPreviews[indexToRemove];
-      return newPreviews;
+      const sections = [...prev.sections];
+      sections[index].imageUrl = imageUrl;
+      return { ...prev, sections };
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    try {
-      setLoading(true);
-
-      let result;
-      if (aboutData._id) {
-        result = await updateAboutData(aboutData._id, aboutData);
-      } else {
-        result = await createAboutData(aboutData);
-      }
-
+    setLoading(true);
+    const result = await saveAboutData(aboutData, isEditing);
+    if (result) {
       alert("Content saved successfully!");
-      setError(null);
-
-      const newData = await fetchAboutData();
-      setAboutData(newData);
-    } catch (err) {
-      setError(err.message || "Failed to save content");
-    } finally {
-      setLoading(false);
+      setAboutData(result);
+      setIsEditing(true);
+    } else {
+      setError("Failed to save content");
     }
+    setLoading(false);
   };
-
-  if (loading) return <div>Loading...</div>;
 
   return (
     <div className="about-content-manager">
       <h1>About Page Content Manager</h1>
-
       {error && <div className="error-message">{error}</div>}
-
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Page Title</label>
-          <input
-            type="text"
-            name="title"
-            value={aboutData.title}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-
-        <div>
-          <label>Quote</label>
-          <textarea
-            name="quote"
-            value={aboutData.quote}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-
-        <div>
-          <label>Quote Author</label>
-          <input
-            type="text"
-            name="quoteAuthor"
-            value={aboutData.quoteAuthor}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-
+        <input type="text" name="title" value={aboutData.title} onChange={handleInputChange} required placeholder="Page Title" />
+        <textarea name="quote" value={aboutData.quote} onChange={handleInputChange} required placeholder="Quote" />
+        <input type="text" name="quoteAuthor" value={aboutData.quoteAuthor} onChange={handleInputChange} required placeholder="Quote Author" />
         {aboutData.sections.map((section, index) => (
-          <div key={index} className="section-container">
-            <h3>Section {index + 1}</h3>
-            <input
-              type="text"
-              name="title"
-              placeholder="Section Title"
-              value={section.title}
-              onChange={(e) => handleInputChange(e, index)}
-              required
-            />
-            <textarea
-              name="text"
-              placeholder="Section Text"
-              value={section.text}
-              onChange={(e) => handleInputChange(e, index)}
-              required
-            />
+          <div key={index}>
+            <input type="text" name="title" value={section.title} onChange={(e) => handleInputChange(e, index)} required placeholder="Section Title" />
+            <textarea name="text" value={section.text} onChange={(e) => handleInputChange(e, index)} required placeholder="Section Text" />
+            <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, index)} />
+            {section.imageUrl && <img src={section.imageUrl} alt="Section" width="100" />}
           </div>
         ))}
-
-        <button type="submit" disabled={loading}>
-          {isEditing ? "Update Content" : "Create Content"}
-        </button>
+        <button type="submit" disabled={loading}>{isEditing ? "Update Content" : "Create Content"}</button>
       </form>
     </div>
   );
 }
 
 export default AboutContentManager;
-
