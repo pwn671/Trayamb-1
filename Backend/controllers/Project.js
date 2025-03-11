@@ -152,7 +152,7 @@ export const updateProject = async (req, res) => {
       removeOldImage(existingProject.image);
       
       // Set new image path
-      updateData.image = `/uploads/projects/${path.basename(req.file.path)}`;
+      updateData.image = `/images/projects/${path.basename(req.file.path)}`;
     }
     
     // Update project
