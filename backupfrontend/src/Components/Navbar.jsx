@@ -139,7 +139,7 @@ export default function Navbar() {
               >
                 <img
                   className="img-fluid h-100 w-100"
-                  src={`${BaseUrl}/images/${user.profile}`}
+                  src={`${BaseUrl}/uploads/${user.profile}`}
                   alt="Profile"
                   style={{ objectFit: "cover" }}
                 />
