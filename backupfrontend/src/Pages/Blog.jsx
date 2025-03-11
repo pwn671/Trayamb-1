@@ -69,7 +69,7 @@ export default function Blog() {
             {post && post.title}
           </h1>
           <img
-            src={singlePost && `${BaseUrl}/images/${singlePost.image}`}
+            src={singlePost && `${BaseUrl}/uploads/${singlePost.image}`}
             alt="Exploring the Art of Writing"
             className="img-fluid mb-4"
             style={{
@@ -123,7 +123,7 @@ export default function Blog() {
               return (
                 <div className="bg-secondary p-3 rounded mb-3 d-flex">
                   <img
-                    src={`${BaseUrl}/images/${elem.userId.profile}`}
+                    src={`${BaseUrl}/uploads/${elem.userId.profile}`}
                     alt="John Doe"
                     className="rounded-circle me-3"
                     style={{
