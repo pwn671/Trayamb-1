@@ -23,15 +23,15 @@ export const processImageUrl = (image) => {
       processedImage = image;
     }
     // Relative paths with leading slash
-    else if (image.startsWith("/images")) {
+    else if (image.startsWith("/uploads")) {
       processedImage = `${BASE_API_URL}${image}`;
     }
     // Relative paths without leading slash
-    else if (image.startsWith("images/")) {
+    else if (image.startsWith("uploads/")) {
       processedImage = `${BASE_API_URL}/${image}`;
     }
     // Other potential path formats
-    else if (image.includes("images")) {
+    else if (image.includes("uploads")) {
       processedImage = `${BASE_API_URL}/${image}`;
     }
   }
