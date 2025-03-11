@@ -58,7 +58,7 @@ apiClient.interceptors.response.use(
 
 export const getAbout = async () => {
   try {
-    const response = await apiClient.get(${API_URL});
+    const response = await apiClient.get('${API_URL}');
     return response.data;
   } catch (error) {
     throw error;
