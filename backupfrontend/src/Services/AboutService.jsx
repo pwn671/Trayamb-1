@@ -240,7 +240,7 @@ export const uploadImage = async (file) => {
   formData.append("image", file);
 
   try {
-    const response = await apiClient.post("/api/about/uploads", formData, {
+    const response = await apiClient.post("/api/about/images", formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });
 

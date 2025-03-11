@@ -117,7 +117,7 @@ export default function AddPost() {
                     <div className="mt-2">
                       <small>Current Image:</small>
                       <img
-                        src={`/uploads/${existingImage}`}
+                        src={`/images/${existingImage}`}
                         alt="Current"
                         style={{ maxWidth: "200px", maxHeight: "200px" }}
                       />
