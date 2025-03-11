@@ -405,11 +405,6 @@
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import // getAbout,
-// updateAbout,
-// createAbout,
-// uploadImage,
-"../../Services/AboutService";
 import { FaTrash, FaUpload } from "react-icons/fa";
 
 // Safely get environment variable
@@ -419,7 +414,6 @@ const getEnvVariable = (key, defaultValue) => {
       ? window._env_[key]
       : process.env[key] || defaultValue;
   } catch (error) {
-    // console.warn(`Error accessing environment variable ${key}:`, error);
     return defaultValue;
   }
 };
@@ -488,85 +482,47 @@ function AboutContentManager() {
   const [isEditing, setIsEditing] = useState(false);
   const [imagePreview, setImagePreview] = useState({});
 
-  // useEffect(() => {
-  //   fetchAboutData().then((data) => {
-  //     console.log("Fetched data:", response.data);
+  useEffect(() => {
+    const loadData = async () => {
+      const data = await fetchAboutData();
+      console.log("Fetched data:", data); // Log the fetched data
 
-  //     if (data) {
-  //       // Ensure all required fields exist
-  //       const formattedData = {
-  //         _id: data._id || null,
-  //         title: data.title || "",
-  //         quote: data.quote || "",
-  //         quoteAuthor: data.quoteAuthor || "",
-  //         sections:
-  //           data.sections && data.sections.length > 0
-  //             ? data.sections.map((section) => ({
-  //                 title: section.title || "",
-  //                 text: section.text || "",
-  //                 imageUrl: section.imageUrl || "",
-  //               }))
-  //             : [{ title: "", text: "", imageUrl: "" }],
-  //       };
+      if (data) {
+        const formattedData = {
+          _id: data._id || null,
+          title: data.title || "",
+          quote: data.quote || "",
+          quoteAuthor: data.quoteAuthor || "",
+          sections:
+            data.sections && data.sections.length > 0
+              ? data.sections.map((section) => ({
+                  title: section.title || "",
+                  text: section.text || "",
+                  imageUrl: section.imageUrl || "",
+                }))
+              : [{ title: "", text: "", imageUrl: "" }],
+        };
 
-  //       console.log("Formatted data:", formattedData); // Debugging log
-  //       setAboutData(formattedData);
-  //       setIsEditing(!!data._id);
+        console.log("Formatted data:", formattedData); // Debugging log
+        setAboutData(formattedData);
+        setIsEditing(!!data._id);
 
-  //       // Initialize image previews
-  //       const previews = {};
-  //       formattedData.sections.forEach((section, index) => {
-  //         if (section.imageUrl) {
-  //           previews[index] = section.imageUrl;
-  //         }
-  //       });
-  //       setImagePreview(previews);
-  //     } else {
-  //       console.error("No data returned from fetch.");
-  //     }
-  //   });
-  // }, []);
-useEffect(() => {
-  const loadData = async () => {
-    const data = await fetchAboutData();
-    console.log("Fetched data:", data); // Log the fetched data
+        const previews = {};
+        formattedData.sections.forEach((section, index) => {
+          if (section.imageUrl) {
+            previews[index] = section.imageUrl;
+          }
+        });
+        setImagePreview(previews);
+      } else {
+        console.error("No data returned from fetch.");
+      }
+      setLoading(false); // Set loading to false after data is fetched
+    };
 
-    if (data) {
-      // Ensure all required fields exist
-      const formattedData = {
-        _id: data._id || null,
-        title: data.title || "",
-        quote: data.quote || "",
-        quoteAuthor: data.quoteAuthor || "",
-        sections:
-          data.sections && data.sections.length > 0
-            ? data.sections.map((section) => ({
-                title: section.title || "",
-                text: section.text || "",
-                imageUrl: section.imageUrl || "",
-              }))
-            : [{ title: "", text: "", imageUrl: "" }],
-      };
+    loadData();
+  }, []);
 
-      console.log("Formatted data:", formattedData); // Debugging log
-      setAboutData(formattedData);
-      setIsEditing(!!data._id);
-
-      // Initialize image previews
-      const previews = {};
-      formattedData.sections.forEach((section, index) => {
-        if (section.imageUrl) {
-          previews[index] = section.imageUrl;
-        }
-      });
-      setImagePreview(previews);
-    } else {
-      console.error("No data returned from fetch.");
-    }
-  };
-
-  loadData();
-}, []);
   const handleInputChange = (e, sectionIndex = null) => {
     const { name, value } = e.target;
     setAboutData((prev) => {
@@ -586,14 +542,11 @@ useEffect(() => {
     const file = e.target.files[0];
     if (!file) return;
 
-    // Validate file type and size
     const validTypes = ["image/jpeg", "image/png", "image/gif", "image/webp"];
     const maxSize = 5 * 1024 * 1024; // 5MB
 
     if (!validTypes.includes(file.type)) {
-      setError(
-        "Invalid file type. Please upload JPEG, PNG, GIF, or WebP images."
-      );
+      setError("Invalid file type. Please upload JPEG, PNG, GIF, or WebP images.");
       return;
     }
 
@@ -603,7 +556,6 @@ useEffect(() => {
     }
 
     try {
-      // Create local preview
       const reader = new FileReader();
       reader.onloadend = () => {
         setImagePreview((prev) => ({
@@ -613,10 +565,7 @@ useEffect(() => {
       };
       reader.readAsDataURL(file);
 
-      // Upload to server
       const { imageUrl } = await uploadImage(file);
-
-      // Ensure the imageUrl is a full URL
       const fullImageUrl = imageUrl.startsWith("http")
         ? imageUrl
         : `${API_BASE_URL}${imageUrl}`;
@@ -669,11 +618,8 @@ useEffect(() => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Enhanced validation
     if (!aboutData.title || !aboutData.quote || !aboutData.quoteAuthor) {
-      setError(
-        "Please fill in all required fields: Title, Quote, and Quote Author"
-      );
+      setError("Please fill in all required fields: Title, Quote, and Quote Author");
       return;
     }
 
@@ -682,7 +628,6 @@ useEffect(() => {
       return;
     }
 
-    // Validate sections
     const invalidSection = aboutData.sections.find(
       (section) => !section.title || !section.text
     );
@@ -696,7 +641,6 @@ useEffect(() => {
       console.log("Submitting:", aboutData);
 
       let result;
-      // Modify the logic to handle both create and update scenarios
       if (aboutData._id) {
         result = await updateAboutData(aboutData._id, {
           title: aboutData.title,
@@ -716,12 +660,9 @@ useEffect(() => {
       console.log("API Response:", result);
       alert("Content saved successfully!");
       setError(null);
-
-      // Refresh data after successful save
-      await fetchAboutData();
+      await fetchAboutData(); // Refresh data after successful save
     } catch (err) {
       console.error("Error saving data:", err);
-      // More detailed error handling
       const errorMessage =
         err.response?.data?.error ||
         err.response?.data?.details ||
@@ -848,4 +789,3 @@ useEffect(() => {
 }
 
 export default AboutContentManager;
-
