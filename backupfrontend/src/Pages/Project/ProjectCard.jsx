@@ -3,7 +3,7 @@ import "./ProjectCard.css";
 import { Link } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import { processImageUrl } from "../../utils/imageUtils";
-import Befaultimg from "../../images/default-project-image.jpg"
+
 
 const ProjectCard = ({ project = {} }) => {
   const {
@@ -31,7 +31,7 @@ const ProjectCard = ({ project = {} }) => {
               alt: e.target.alt,
               originalImage: image,
             });
-            e.target.src ={Befaultimg};
+            e.target.src ="../../images/default-project-image.jpg";
           }}
         />
       </div>
