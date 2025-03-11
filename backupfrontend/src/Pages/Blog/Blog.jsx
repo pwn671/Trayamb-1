@@ -375,7 +375,7 @@ function Blog() {
           <div className="lNews">
             <div className="ln-img">
               <img
-                src={`${BaseUrl}/images/${blogs[blogs.length - 1].image}`}
+                src={`${BaseUrl}/uploads/${blogs[blogs.length - 1].image}`}
                 alt="Latest News"
               />
             </div>
