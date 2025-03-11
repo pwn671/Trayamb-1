@@ -493,22 +493,112 @@ function AboutContentManager() {
   };
 
   return (
-    <div className="about-content-manager">
+       <div className="about-content-manager">
       <h1>About Page Content Manager</h1>
+
       {error && <div className="error-message">{error}</div>}
+
       <form onSubmit={handleSubmit}>
-        <input type="text" name="title" value={aboutData.title} onChange={handleInputChange} required placeholder="Page Title" />
-        <textarea name="quote" value={aboutData.quote} onChange={handleInputChange} required placeholder="Quote" />
-        <input type="text" name="quoteAuthor" value={aboutData.quoteAuthor} onChange={handleInputChange} required placeholder="Quote Author" />
+        <div>
+          <label>Page Title</label>
+          <input
+            type="text"
+            name="title"
+            value={aboutData.title}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+
+        <div>
+          <label>Quote</label>
+          <textarea
+            name="quote"
+            value={aboutData.quote}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+
+        <div>
+          <label>Quote Author</label>
+          <input
+            type="text"
+            name="quoteAuthor"
+            value={aboutData.quoteAuthor}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+
         {aboutData.sections.map((section, index) => (
-          <div key={index}>
-            <input type="text" name="title" value={section.title} onChange={(e) => handleInputChange(e, index)} required placeholder="Section Title" />
-            <textarea name="text" value={section.text} onChange={(e) => handleInputChange(e, index)} required placeholder="Section Text" />
-            <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, index)} />
-            {section.imageUrl && <img src={section.imageUrl} alt="Section" width="100" />}
+          <div key={index} className="section-container">
+            <h3>Section {index + 1}</h3>
+            <input
+              type="text"
+              name="title"
+              placeholder="Section Title"
+              value={section.title}
+              onChange={(e) => handleInputChange(e, index)}
+              required
+            />
+            <textarea
+              name="text"
+              placeholder="Section Text"
+              value={section.text}
+              onChange={(e) => handleInputChange(e, index)}
+              required
+            />
+
+            <div className="image-upload-container">
+              <input
+                type="file"
+                id={`image-upload-${index}`}
+                accept="image/*"
+                onChange={(e) => handleImageUpload(e, index)}
+                hidden
+              />
+              <label
+                htmlFor={`image-upload-${index}`}
+                className="image-upload-label"
+              >
+                <FaUpload /> Upload Image
+              </label>
+
+              {(imagePreview[index] || section.imageUrl) && (
+                <div className="image-preview">
+                  <img
+                    src={imagePreview[index] || section.imageUrl}
+                    alt={`Section ${index + 1}`}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => removeImage(index)}
+                    className="remove-image-btn"
+                  >
+                    <FaTrash /> Remove
+                  </button>
+                </div>
+              )}
+            </div>
+
+            <button
+              type="button"
+              onClick={() => removeSection(index)}
+              className="remove-section-btn"
+            >
+              Remove Section
+            </button>
           </div>
         ))}
-        <button type="submit" disabled={loading}>{isEditing ? "Update Content" : "Create Content"}</button>
+
+        <button type="button" onClick={addSection} className="add-section-btn">
+          Add New Section
+        </button>
+
+        <button type="submit" disabled={loading} className="submit-btn">
+          {isEditing ? "Update Content" : "Create Content"}
+        </button>
       </form>
     </div>
   );
