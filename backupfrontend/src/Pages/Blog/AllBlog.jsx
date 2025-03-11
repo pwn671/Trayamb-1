@@ -59,7 +59,7 @@ function AllBlog() {
                 blogs.map((blog) => (
                   <CardBlog
                     key={blog._id}
-                    image={`${BaseUrl}/images/${blog.image}`}
+                    image={`${BaseUrl}/uploads/${blog.image}`}
                     title={blog.title}
                     description={truncateText(blog.desc, 20)}
                     date={moment(blog.createdAt).format("D MMMM, YYYY")}
