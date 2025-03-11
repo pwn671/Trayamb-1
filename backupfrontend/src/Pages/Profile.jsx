@@ -204,7 +204,7 @@ export default function Profile() {
                 <img
                   src={
                     user.profile
-                      ? `${BaseUrl}/images/${user.profile}`
+                      ? `${BaseUrl}/uploads/${user.profile}`
                       : "/default-avatar.png"
                   }
                   alt="Avatar"
