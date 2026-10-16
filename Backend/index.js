@@ -12,6 +12,7 @@ import AboutRoutes from "./routes/About.js";
 import UploadRoutes from "./routes/UploadRoutes.js";
 import ContactRoutes from './routes/Contact.js';
 import projectRoutes from './routes/Project.js';
+import ChatbotRoutes from './routes/Chatbot.js';
 
 dotenv.config()
 
@@ -29,7 +30,7 @@ app.use(cookieParser())
 //     credentials:true
 // }
   const corsOptoins={
-  origin: 'https://trayambassociates.netlify.app',
+  origin: [process.env.FRONTEND_URL || 'https://trayambassociates.netlify.app', 'http://localhost:5173'],
     credentials:true
 }
 app.use(cors(corsOptoins))
@@ -49,6 +50,7 @@ app.use('/public',PublicRoutes)
 app.use('/api/projects', projectRoutes);
 
 app.use('/contact', ContactRoutes);
+app.use('/chatbot', ChatbotRoutes);
 app.use('/uploads', express.static('uploads'));
 app.use("/api/about", AboutRoutes);
 app.use("/api/upload", UploadRoutes);
