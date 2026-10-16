@@ -105,6 +105,9 @@
     align-items: center;
     gap: 10px;
   }
+.navbar {
+ z-index: -1important;
+}
   .header-top__links li:first-child:after {
     background-color: hsla(0, 0%, 42%, 0.102) !important;
   }
