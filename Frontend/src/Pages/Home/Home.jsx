@@ -1,5 +1,6 @@
 import React from "react";
 import SimpleSlider from "../../Components/slider/Slider";
+import ChatbotWidget from "../../Components/ChatbotWidget";
 import "./Home.css";
 import "./HomeResponsive.css";
 import photoBg from "../../images/backgroung/homeBg.jpg";
@@ -27,7 +28,6 @@ import brand5 from "../../images/brand5.svg";
 import customer1 from "../../images/home/customer.jpg";
 import ArticlesBlog from "../Blog/ArticlesBlog";
 import Homeproject from "../../Components/Homeproject";
-import ChatbotWidget from "../../Components/ChatbotWidget";
 
 function Home() {
   const handleChange = (e) => {
@@ -60,7 +60,7 @@ function Home() {
       </div> */}
       <div className="home-hero-chatbot">
         <SimpleSlider />
-        <ChatbotWidget variant="hero" />
+        <ChatbotWidget heroOnly />
       </div>
       <div className="homeOther">
         <div className="homePlans">
