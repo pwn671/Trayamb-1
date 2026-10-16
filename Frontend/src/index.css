@@ -160,6 +160,9 @@
     z-index: 1;
     background-color: var(--sub-bg);
   }
+#nl-badge-frame {
+    display:none;
+    }
   .footer__shape2 {
     position: absolute;
     bottom: 50px;
