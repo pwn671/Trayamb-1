@@ -1,13 +1,21 @@
+
 import mongoose from "mongoose";
 
+const DBCon = async () => {
+  const mongoURI =
+    process.env.MONGODB_URI || process.env.MONGDB_ULR;
 
-const DBCon=async()=>{
-    try {
-          mongoose.connect(process.env.MONGDB_ULR)
-          console.log('MONGODB IS CONNECTED')
-    } catch (error) {
-        console.log(error)
-    }
-}
+  if (!mongoURI) {
+    console.error("MongoDB error: MONGODB_URI environment variable is missing");
+    return;
+  }
 
-export default DBCon
+  try {
+    await mongoose.connect(mongoURI);
+    console.log("MongoDB connected successfully");
+  } catch (error) {
+    console.error("MongoDB connection failed:", error.message);
+  }
+};
+
+export default DBCon;
